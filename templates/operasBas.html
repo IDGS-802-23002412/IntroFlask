@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action="/resultado" method="post">
+
+    <div class="mb-3">
+        <label for="n1" class="form-label"> Numero 1: </label>
+        <input type="text" class="form-control" id="n1" name="n1">
+    </div>
+
+    <div class="mb-3">
+        <label for="n2" class="form-label"> Numero 2: </label>
+        <input type="text" class="form-control" id="n2" name="n2">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"> Seleccione la operacion: </label> <br>
+
+        <input type="radio" name="operacion" value="suma">
+        <label> Sumar </label> <br>
+
+        <input type="radio" name="operacion" value="restar">
+        <label> Restar </label> <br>
+
+        <input type="radio" name="operacion" value="multiplicacion">
+        <label> Multiplicar </label> <br>
+
+        <input type="radio" name="operacion" value="division">
+        <label> Dividir </label> <br>
+
+    </div>
+    <button type="submit" class="btn btn-primary"> Calcular </button>
+</form>
+
+{% endblock %}
