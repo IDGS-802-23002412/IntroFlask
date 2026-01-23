@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from math import sqrt
 
 app = Flask(__name__)
 
@@ -53,9 +54,17 @@ def opera():
     <form>
     '''
 
-@app.route("/operasBas")
+@app.route("/operasBas" , methods=["GET","POST"])
 def operasBas():
-    return render_template("operasBas.html")
+    n1=0
+    n2=0
+    res=0
+    if request.method == "POST":
+        n1=request.form.get("n1")
+        n2=request.form.get("n2")
+        res=float(n1)+float(n2)
+    
+    return render_template("operasBas.html",n1=n1, n2=n2, res=res)
 
 @app.route("/resultado", methods=["GET","POST"])
 def resultado():
@@ -63,15 +72,35 @@ def resultado():
     n2 = request.form.get("n2")
     operacion = request.form.get("operacion")
 
-    if operacion == suma:     
+    if operacion == "suma":     
         return f"La suma es: {float(n1)+float(n2)}"
-    elif operacion == restar:
+    elif operacion == "restar":
         return f"La resta es: {float(n1)-float(n2)}"
-    elif operacion == multiplicacion:
+    elif operacion == "multiplicacion":
         return f"La multiplicacion es: {float(n1)*float(n2)}"
     else: 
-        return f"La multiplicacion es: {float(n1)/float(n2)}"
+        return f"La division es: {float(n1)/float(n2)}"
 
+@app.route("/alumnos")
+def alumnos():
+
+    return render_template("alumnos.html")
+
+@app.route("/distancia", methods=["GET","POST"])
+def distancia():
+    x1=0
+    y1=0
+    x2=0
+    y2=0
+    res=0
+    if request.method == "POST":
+        x1=float(request.form.get("x1"))
+        y1=float(request.form.get("y1"))
+        x2=float(request.form.get("x2"))
+        y2=float(request.form.get("y2"))
+        res= sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+    return render_template("distancia.html",x1=x1, y1=y1, x2=x2, y2=y2, res=res)
 
 if __name__ == '__main__':
     app.run(debug=True)

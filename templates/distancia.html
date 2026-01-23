@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% import "_macros.html" as macros %}
+
+<form action="/distancia" method="post">
+
+    {{macros.datos("x1","Ingrese el valor de x1","number")}}
+    {{macros.datos("y1","Ingrese el valor de y1","number")}}
+    {{macros.datos("x2","Ingrese el valor de x2","number")}}
+    {{macros.datos("y2","Ingrese el valor de y2","number")}}
+    
+
+    <button type="submit" class="btn btn-primary"> Calcular </button>
+
+</form>
+
+<h1>
+    La distancia es igual a: {{ "%.2f"|format(res)}}
+</h1>
+{% endblock %}

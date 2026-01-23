@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="/resultado" method="post">
+<form action="/operasBas" method="post">
 
     <div class="mb-3">
         <label for="n1" class="form-label"> Numero 1: </label>
@@ -32,5 +32,9 @@
     </div>
     <button type="submit" class="btn btn-primary"> Calcular </button>
 </form>
+
+<h1>
+    La suma de {{n1}} + {{n2}} = {{ "%.2f"|format(res)}}
+</h1>
 
 {% endblock %}
