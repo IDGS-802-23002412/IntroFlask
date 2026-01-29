@@ -1,0 +1,68 @@
+body {
+    background: url("../img/cinepolis.png");
+}
+
+form {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+        "entradas salidas"
+        "botones botones";
+    gap: 30px;
+}
+
+label {
+    color: white;
+}
+
+form > div:nth-of-type(1) {
+    grid-area: entradas;
+}
+
+form > div:nth-of-type(2) {
+    grid-area: salidas;
+}
+
+form > div:nth-of-type(3) {
+    grid-area: botones;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+h1 {
+    font-size: 20px;
+    color: white;
+    border-bottom: 2px solid white;
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="number"] {
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+button {
+    width: 150px;
+}
+
+/* Campo de salida */
+input[readonly] {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+/* Evita que el navbar tape el contenido */
+.fondo {
+    margin-top: 80px;
+}

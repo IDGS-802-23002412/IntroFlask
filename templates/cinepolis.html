@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cinépolis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    {% import "_macros.html" as macros %}
+
+    <form action="/cinepolis" method="post">
+        <div>
+            <h1>Entradas</h1>
+            {{ macros.datos("nombre", "Ingrese su nombre", "text") }}
+            {{ macros.datos("cantidadCompradores", "Ingrese la cantidad", "number") }}
+
+            <label class="form-label">Tarjeta Cineco:</label>
+            {{ macros.radio("opcion", "Si", "Si") }}
+            {{ macros.radio("opcion", "No", "No") }}
+            {{ macros.datos("cantidadBoletas", "¿Cuántos boletos desea comprar?", "number") }}
+        </div>
+
+        <div>
+            <h1>Salidas</h1>
+            <label>Valor a pagar:</label>
+            <input type="number" class="form-control" name="costo" value="{{ total if total else '' }}" readonly>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary me-3">Procesar</button>
+            <a href="/" class="btn btn-secondary">Salir</a>
+        </div>
+
+    </form>
+
+    {% if mensaje %}
+    <script> 
+    alert("{{ mensaje }}");
+    </script>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
