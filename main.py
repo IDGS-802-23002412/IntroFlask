@@ -135,37 +135,33 @@ def cinepolis():
     total = 0
     mensaje = ""
 
-    if request.method == "POST":
-        nombre = request.form.get("nombre")
-        cantidadCompradores = int(request.form.get("cantidadCompradores"))
-        cantidadBoletas = int(request.form.get("cantidadBoletas"))
-        tarjetaCineco = request.form.get("opcion")
+    cinepolis_class = forms.CinepolisForm(request.form)
+
+    if request.method == "POST" and cinepolis_class.validate():
+
+        nom = cinepolis_class.nombre.data
+        cantidadCompradores = cinepolis_class.cantidadCompradores.data
+        cantidadBoletas = cinepolis_class.cantidadBoletas.data
+        tarjetaCineco = cinepolis_class.opcion.data
 
         maxBoletos = cantidadCompradores * 7
 
         if cantidadBoletas > maxBoletos:
-            mensaje = (
-                f"{nombre}"
-                f"No puedes comprar más de "
-                f"{maxBoletos} boletas por cantidad de compradores "
-            )   
-            return render_template("cinepolis.html", mensaje=mensaje)
-
-        subtotal = cantidadBoletas * precioBoleta
-
-        if cantidadBoletas > 5:
-            subtotal *= 0.85
-        elif cantidadBoletas >= 3:
-            subtotal *= 0.90
-
-        if tarjetaCineco == "Si":
-            total = subtotal * 0.90
+            mensaje = f"{nom}, no se pueden comprar más de {maxBoletos} boletas"
         else:
-            total = subtotal
+            subtotal = cantidadBoletas * precioBoleta
 
-        return render_template("cinepolis.html",total=total,mensaje=mensaje)
+            if cantidadBoletas > 5:
+                subtotal *= 0.85
+            elif cantidadBoletas >= 3:
+                subtotal *= 0.90
 
-    return render_template("cinepolis.html")
+            if tarjetaCineco == "Si":
+                total = subtotal * 0.90
+            else:
+                total = subtotal
+
+    return render_template("cinepolis.html",form=cinepolis_class,total=total,mensaje=mensaje)
 
 if __name__ == '__main__':
     csrf.init_app(app)

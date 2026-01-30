@@ -56,13 +56,11 @@ button {
     width: 150px;
 }
 
-/* Campo de salida */
 input[readonly] {
     background-color: #e9ecef;
     font-weight: bold;
 }
 
-/* Evita que el navbar tape el contenido */
 .fondo {
     margin-top: 80px;
 }

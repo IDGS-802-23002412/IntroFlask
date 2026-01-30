@@ -1,5 +1,5 @@
 from wtforms import Form
-from wtforms import StringField, IntegerField, PasswordField
+from wtforms import StringField, IntegerField, PasswordField, RadioField
 from wtforms import EmailField
 from wtforms import validators
 
@@ -25,4 +25,23 @@ class UserForm(Form):
             validators.Email(message='Ingrese un correo válido')
     ])
 
+class CinepolisForm(Form): 
+        nombre = StringField('nombre', [
+                validators.DataRequired(message='El campo es requerido'),
+                validators.Length(min=3, max=10, message='Ingrese nombre válido')
+        ])
+        cantidadCompradores = IntegerField('cantidadCompradores',[
+                validators.DataRequired(message='El campo es requerido'),
+                validators.NumberRange(min=1, max=1000, message='Ingrese un valor válido')
+        ])
+        opcion = RadioField('Tarjeta Cineco',
+                choices=[('Si', 'Si'), ('No', 'No')],
+                validators=[validators.DataRequired(message='Seleccione una opción')
+        ])
+        cantidadBoletas = IntegerField('cantidadBoletas',[
+                validators.DataRequired(message='El campo es requerido'),
+                validators.NumberRange(min=1, max=1000, message='Ingrese un valor válido')
+        ])
 
+
+        

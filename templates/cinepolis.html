@@ -15,14 +15,15 @@
     {% import "_macros.html" as macros %}
 
     <form action="/cinepolis" method="post">
+        
+        {{form.csrf_token}}
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
         <div>
             <h1>Entradas</h1>
-            {{ macros.datos("nombre", "Ingrese su nombre", "text") }}
-            {{ macros.datos("cantidadCompradores", "Ingrese la cantidad", "number") }}
-
-            <label class="form-label">Tarjeta Cineco:</label>
-            {{ macros.radio("opcion", "Si", "Si") }}
-            {{ macros.radio("opcion", "No", "No") }}
+            {{ macros.campoNuevo(form.nombre, class="form-control")}}
+            {{ macros.campoNuevo(form.cantidadCompradores, class="form-control")}}
+            {{ macros.campoNuevo(form.opcion)}}
             {{ macros.datos("cantidadBoletas", "¿Cuántos boletos desea comprar?", "number") }}
         </div>
 
@@ -40,10 +41,11 @@
     </form>
 
     {% if mensaje %}
-    <script> 
-    alert("{{ mensaje }}");
-    </script>
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        {{ mensaje }}
+    </div>
     {% endif %}
+
 
 </div>
 
